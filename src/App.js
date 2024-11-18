@@ -1,5 +1,7 @@
 /** @format */
 
+import TextExpander from "./components/TextExpander";
+
 import "./index.css";
 
 export default function App() {
@@ -33,8 +35,4 @@ export default function App() {
       </TextExpander>
     </div>
   );
-}
-
-function TextExpander() {
-  return <div>TODO</div>;
 }
