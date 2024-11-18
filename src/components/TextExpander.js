@@ -4,7 +4,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 TextExpander.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
   buttonColor: PropTypes.string,
   collapsedNumWords: PropTypes.number,
@@ -22,17 +22,24 @@ export default function TextExpander({
   collapseButtonText = "Show less",
   className = "",
 }) {
-  const [isOpen, setIsOpen] = useState(expanded);
+  const [isExpanded, setIsExpanded] = useState(expanded);
 
-  const style = { color: buttonColor };
+  const style = {
+    border: "none",
+    color: buttonColor,
+    font: "inherit",
+    backgroundColor: "transparent",
+    marginLeft: "6px",
+    cursor: "pointer",
+  };
   const collapsedString = children.split(" ").slice(0, collapsedNumWords).join(" ");
 
   return (
     <div className={className}>
-      {!isOpen ? `${collapsedString}...` : children} &nbsp;
-      <span role="button" style={style} onClick={() => setIsOpen((cur) => !cur)}>
-        {!isOpen ? expandButtonText : collapseButtonText}
-      </span>
+      <span>{!isExpanded ? `${collapsedString}...` : children}</span>
+      <button style={style} onClick={() => setIsExpanded((cur) => !cur)}>
+        {!isExpanded ? expandButtonText : collapseButtonText}
+      </button>
     </div>
   );
 }
